@@ -27,6 +27,8 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '/app')));
 
 // Routing
+app.use('/api/daily', require('./routes/daily'));
+
 // Private calls should stay fake 404 error instead 401 ( access denied )
 app.use('/:url(api)*', function (req, res, next) {
     res.redirect('/404');
@@ -44,10 +46,6 @@ app.route('/*').get((req, res) => {
     res.sendFile(__dirname + '/app/index.html');
 });
 
-
-app.use('/api/daily', require('./routes/daily'));
-
 app.listen(port, function () {
     console.log("Server is running on " + port + " port");
 });
-
