@@ -21,6 +21,8 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ApiService } from './service/api.service';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,13 @@ import { CommonModule } from '@angular/common';
     MatProgressSpinnerModule,
     MatBottomSheetModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    ApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

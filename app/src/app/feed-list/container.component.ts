@@ -1,29 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Feed } from '../model/feed';
-import { config } from 'rxjs';
-const tmp = [
-  {
-    id: 1,
-    title: 'Feed1',
-    body: 'lorem ipsum blablalba',
-    source: 'webpage',
-    publisher: 'myself'
-  },
-  {
-    id: 2,
-    title: 'Feed2',
-    body: 'lorem ipsum blablalba',
-    source: 'webpage',
-    publisher: 'myself'
-  },
-  {
-    id: 3,
-    title: 'Feed3',
-    body: 'lorem ipsum blablalba',
-    source: 'webpage',
-    publisher: 'myself'
-  }
-];
+import { config, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ApiService } from '../service/api.service';
+// const tmp = [
+//   {
+//     id: 1,
+//     title: 'Feed1',
+//     body: 'lorem ipsum blablalba',
+//     source: 'webpage',
+//     publisher: 'myself'
+//   },
+//   {
+//     id: 2,
+//     title: 'Feed2',
+//     body: 'lorem ipsum blablalba',
+//     source: 'webpage',
+//     publisher: 'myself'
+//   },
+//   {
+//     id: 3,
+//     title: 'Feed3',
+//     body: 'lorem ipsum blablalba',
+//     source: 'webpage',
+//     publisher: 'myself'
+//   }
+// ];
 
 @Component({
   selector: 'app-container',
@@ -33,12 +35,19 @@ const tmp = [
 export class ContainerComponent implements OnInit {
   public list: Array<any>;
   public newMode: boolean;
-  constructor() { }
+  private destroy$: Subject<boolean> = new Subject();
+  constructor(private api: ApiService) { }
 
+  private getData(): void {
+    this.api.getFeedList().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(data => this.list = data);
+  }
   ngOnInit() {
-    if (!this.list) {
-      this.list = tmp;
-    }
+    // if (!this.list) {
+    //   this.list = tmp;
+    // }
+    this.getData();
   }
 
   public clickNew(): void {
