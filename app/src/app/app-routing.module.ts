@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DefaultComponent } from './feed/default/default.component';
-import { DetailedComponent } from './feed/detailed/detailed.component';
+import { ContainerComponent } from './feed-list/container.component';
 
 
 const routes: Routes = [
   {
-    path: 'home', component: DefaultComponent
-  },
-  {
-    path: 'home/:id', component: DetailedComponent
+    path: 'home', component: ContainerComponent,
   },
   {
     path: '', redirectTo: 'home', pathMatch: 'full',

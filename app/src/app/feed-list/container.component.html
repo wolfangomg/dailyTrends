@@ -1,0 +1,22 @@
+<div class="w-100" *ngIf="newMode">
+    <app-new (onnew)="onUpdateFeed($event)"></app-new>
+</div>
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title>Feed List</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="list">
+            <button mat-fab aria-label="New Feed" (click)="clickNew()">
+                <mat-icon *ngIf="newMode">clear</mat-icon>
+                <mat-icon *ngIf="!newMode">add</mat-icon>
+            </button>
+            <ng-container *ngFor="let feed of list">
+                <app-feed
+                [config]="feed"
+                (onupdate)="onUpdateFeed($event)">
+                </app-feed>
+            </ng-container>
+        </div>
+    </mat-card-content>
+</mat-card>

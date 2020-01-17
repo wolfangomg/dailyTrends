@@ -1,1 +1,29 @@
-<p>new works!</p>
+<mat-card class="container">
+    <mat-card-header>
+        <mat-card-title>New feed</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field class="w-100">
+                <input matInput [formControl]="form.controls.title" placeholder="Title" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <input matInput [formControl]="form.controls.body" placeholder="Body" required>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+                <input matInput [formControl]="form.controls.source" placeholder="Source">
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+                <input matInput [formControl]="form.controls.publisher" placeholder="Publisher">
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+                <input matInput [formControl]="form.controls.source" placeholder="Source">
+            </mat-form-field>
+        </form>
+        <button mat-raised-button (click)="clickCancel()">Cancel</button>
+        <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="!form.valid">Submit</button>
+    </mat-card-content>
+</mat-card>
